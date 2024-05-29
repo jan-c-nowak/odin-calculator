@@ -17,10 +17,6 @@ function divide(a, b) {
     return a / b;
 }
 
-let operandA;
-let operandB;
-let operation;
-
 function operate(operation, operandA, operandB) {
     switch (operation) {
         case "add":
@@ -35,4 +31,9 @@ function operate(operation, operandA, operandB) {
             throw new Error("Invalid operation");
     }
 }
+
+let operandA;
+let operandB;
+let operation;
+let displayValue;
 

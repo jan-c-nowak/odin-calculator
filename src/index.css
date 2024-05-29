@@ -1,0 +1,9 @@
+* {
+    font-size: 48px;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.numpad {
+    display: flex;
+    flex-direction: row;
+}
