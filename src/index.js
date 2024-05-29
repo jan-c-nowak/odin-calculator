@@ -35,5 +35,20 @@ function operate(operation, operandA, operandB) {
 let operandA;
 let operandB;
 let operation;
-let displayValue;
+let displayValue = "";
 
+let numpad = document.querySelector(".numpad");
+let display = document.querySelector(".display");
+
+numpad.addEventListener("click", function (event) {
+    
+    let caller = event.target.parentElement.parentElement;
+    
+    if (caller.classList.contains("operations")){
+        console.log("Operator")
+    }
+
+    displayValue += event.target.innerText;
+
+    display.innerText = displayValue;
+})
