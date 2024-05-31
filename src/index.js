@@ -46,41 +46,54 @@ function roundAnswer(answer) {
 let operandA = "";
 let operandB = "";
 let operation = null;
-let displayValue = "";
+let isAnswerDisplayed = true;
 
-let numbers = document.querySelector(".numbers");
-let display = document.querySelector(".display");
-let operations = document.querySelector(".operations")
-let equal = document.querySelector(".equal");
+const numbers = document.querySelector(".numbers");
+const display = document.querySelector(".display");
+const operations = document.querySelector(".operations")
+const equal = document.querySelector(".equal");
 const clear = document.querySelector(".clear");
 
 numbers.addEventListener("click", function (event) {
-    if (displayValue == operation) {
-        displayValue = "";
+    if (display.innerText == operation) {
+        display.innerText = "";
     }
 
-    displayValue += event.target.innerText;
+    if (isAnswerDisplayed) {
+        display.innerText = "";
+        isAnswerDisplayed = false;
+    }
 
-    operation == null ? operandA = displayValue : operandB = displayValue;
+    display.innerText += event.target.innerText;
 
-    display.innerText = displayValue;
+    operation == null ? operandA = display.innerText : operandB = display.innerText;
 })
 
 operations.addEventListener("click", function (event) {
     operation = event.target.innerText;
-    displayValue = operation;
-    display.innerText = displayValue;
+    display.innerText = operation;
 })
 
 equal.addEventListener("click", function (event) {
     event.stopPropagation();
     try {
         display.innerText = roundAnswer(operate(operation, operandA, operandB));
+        isAnswerDisplayed = true;
+        operandA = "";
+        operandB = "";
+        operation = null;
     } catch (error) {
         display.innerText = error.message;
+        isAnswerDisplayed = true;
+        operandA = "";
+        operandB = "";
+        operation = null;
     }
 })
 
 clear.addEventListener("click", function (event) {
-    display.innerText = 0;
+    display.innerText = "";
+    operandA = "";
+    operandB = "";
+    operation = null;
 })
