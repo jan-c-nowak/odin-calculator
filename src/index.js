@@ -19,13 +19,13 @@ function divide(a, b) {
 
 function operate(operation, operandA, operandB) {
     switch (operation) {
-        case "add":
+        case "+":
             return add(operandA, operandB);
-        case "subtract":
+        case "-":
             return subtract(operandA, operandB);
-        case "multiply":
+        case "*":
             return multiply(operandA, operandB);
-        case "divide":
+        case "/":
             return divide(operandA, operandB);
         default:
             throw new Error("Invalid operation");
@@ -34,21 +34,43 @@ function operate(operation, operandA, operandB) {
 
 let operandA;
 let operandB;
-let operation;
+let operation = null;
 let displayValue = "";
 
-let numpad = document.querySelector(".numpad");
+let numbers = document.querySelector(".numbers");
 let display = document.querySelector(".display");
+let operations = document.querySelector(".operations")
+let equal = document.querySelector(".equal");
+const clear = document.querySelector(".clear");
 
-numpad.addEventListener("click", function (event) {
-    
-    let caller = event.target.parentElement.parentElement;
-    
-    if (caller.classList.contains("operations")){
-        console.log("Operator")
+numbers.addEventListener("click", function (event) {
+    if (displayValue == operation) {
+        displayValue = "";
     }
 
     displayValue += event.target.innerText;
 
+    operation == null ? operandA = displayValue : operandB = displayValue;
+
     display.innerText = displayValue;
+})
+
+operations.addEventListener("click", function (event) {
+    operation = event.target.innerText;
+    displayValue = operation;
+    display.innerText = displayValue;
+})
+
+equal.addEventListener("click", function (event) {
+    event.stopPropagation();
+    try {
+        displayValue = operate(operation, operandA, operandB);
+        display.innerText = displayValue;
+    } catch (error) {
+        display.innerText = error.message;
+    }
+})
+
+clear.addEventListener("click", function (event) {
+    display.innerText = 0;
 })
