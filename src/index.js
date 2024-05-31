@@ -15,7 +15,12 @@ function divide(a, b) {
     if (b == 0) {
         throw new Error("Cannot divide by zero");
     }
+
     return a / b;
+}
+
+function getLength(number) {
+    return number.toString().length;
 }
 
 function operate(operation, operandA, operandB) {
@@ -33,8 +38,13 @@ function operate(operation, operandA, operandB) {
     }
 }
 
-let operandA;
-let operandB;
+function roundAnswer(answer) {
+    getLength(answer) > 11? answer = answer.toFixed(11) : answer = answer;
+    return answer;
+}
+
+let operandA = "";
+let operandB = "";
 let operation = null;
 let displayValue = "";
 
@@ -65,8 +75,7 @@ operations.addEventListener("click", function (event) {
 equal.addEventListener("click", function (event) {
     event.stopPropagation();
     try {
-        displayValue = operate(operation, operandA, operandB);
-        display.innerText = displayValue;
+        display.innerText = roundAnswer(operate(operation, operandA, operandB));
     } catch (error) {
         display.innerText = error.message;
     }
