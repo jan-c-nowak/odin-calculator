@@ -93,3 +93,11 @@ button {
     border-radius: 5px;
 }
 
+button:hover {
+    background-color: #44503a;
+}
+
+.equal:hover {
+    background-color: #907559;
+}
+
