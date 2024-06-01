@@ -84,9 +84,10 @@ operations.addEventListener("click", function (event) {
 equal.addEventListener("click", function (event) {
     event.stopPropagation();
     try {
-        display.innerText = roundAnswer(operate(operation, operandA, operandB));
+        temporaryAnswer = roundAnswer(operate(operation, operandA, operandB));
+        display.innerText = temporaryAnswer;
         isAnswerDisplayed = true;
-        operandA = "";
+        operandA = temporaryAnswer;;
         operandB = "";
         operation = null;
     } catch (error) {
