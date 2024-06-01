@@ -47,6 +47,7 @@ let operandA = "";
 let operandB = "";
 let operation = null;
 let isAnswerDisplayed = true;
+let temporaryAnswer;
 
 const numbers = document.querySelector(".numbers");
 const display = document.querySelector(".display");
@@ -70,6 +71,12 @@ numbers.addEventListener("click", function (event) {
 })
 
 operations.addEventListener("click", function (event) {
+    if(operation && operandA && operandB) {
+        let temporaryAnswer = operate(operation, operandA, operandB);
+        display.innerText = roundAnswer(temporaryAnswer);
+        operandA = temporaryAnswer;
+    }
+
     operation = event.target.innerText;
     display.innerText = operation;
 })
